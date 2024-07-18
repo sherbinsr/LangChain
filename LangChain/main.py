@@ -28,7 +28,7 @@ title_memory = ConversationBufferMemory(input_key='title', memory_key='chat_hist
 launch_memory = ConversationBufferMemory(input_key='launch', memory_key='chat_history')
 feature_memory = ConversationBufferMemory(input_key='feature', memory_key='description_history')
 
-## OPENAI LLMS
+## OPENAI LLM
 llm=OpenAI(temperature=0.8)
 
 
@@ -66,3 +66,18 @@ if input_text:
 
     with st.expander('Major Features'):
         st.info(feature_memory.buffer)
+
+## ChatModels with OpenAI
+
+from langchain.chat_models import  ChatOpenAI
+from langchain.schema import HumanMessage,SystemMessage,AIMessage
+
+## OPENAI LLM
+ChatModelllm=ChatOpenAI(openai_api_key=os.environ["OPENAI_API_KEY"],temperature=0.8,model="gpt-3-5-turbo")
+ChatModelllm
+
+## Create a schema
+ChatModelllm([
+    SystemMessage(content="You are a code Generator AI"),
+    HumanMessage(content="Give me a code for Binary Search Tree using JAVA")
+ ])
